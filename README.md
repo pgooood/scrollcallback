@@ -14,7 +14,7 @@ $('.second-element').scrollcallback({
 		alert('You have scrolled to a second element');
 	},
 	outHandler: function(e, direction){
-		alert('You have scrolled to a second element');
+		alert('You have scrolled from a second element');
 	}
 });
 ```
@@ -24,7 +24,7 @@ $('.third-element').scrollcallback({
 		alert('You have scrolled to a third element');
 	},
 	outHandler: function(e, direction){
-		alert('You have scrolled to a third element');
+		alert('You have scrolled from a third element');
 	},
 	context: '#context'
 });
