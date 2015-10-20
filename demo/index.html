@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>JQuery ScrollCallback Plugin Demo</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="bootstrap-notify.min.js"></script>
+	<script src="../jquery.scrollcallback.js"></script>
+	<script>
+$(function(){
+	
+	$('.first-element').scrollcallback(function(e,direction){
+		notify($(e).data('name'),true,direction);
+	});
+	
+	$('.second-element').scrollcallback({
+		inHandler:function(e,direction){
+			notify($(e).data('name'),true,direction);
+		}
+		,outHandler:function(e,direction){
+			notify($(e).data('name'),false,direction);
+		}
+	});
+
+	$('.third-element').scrollcallback({
+		inHandler:function(e,direction){
+			notify($(e).data('name'),true,direction);
+		}
+		,outHandler:function(e,direction){
+			notify($(e).data('name'),false,direction);
+		}
+		,context:'#context'
+	});
+	
+	function notify(name,state,direction){
+		$.notify({message:name+(state ? ' appeared' : ' disappeared')+(direction ? ', srolling '+direction : '')},{type:state ? 'info' : 'danger',template:'<div data-notify="container" class="col-xs-11 col-sm-2 alert alert-{0}" role="alert">'+
+				'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>'+
+				'<span data-notify="icon"></span> '+
+				'<span data-notify="title">{1}</span> '+
+				'<span data-notify="message">{2}</span>'+
+				'<div class="progress" data-notify="progressbar">'+
+					'<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>'+
+				'</div>'+
+				'<a href="{3}" target="{4}" data-notify="url"></a>'+
+			'</div>'});
+	};
+
+});
+	</script>
+</head>
+
+<body>
+<div class="container">
+	<header class="page-header">
+		<h1>ScrollCallback <small> JQuery Plugin Demo</small></h1>
+	</header>
+	<p><b>ScrollCallback</b> is easy way to watch specific DOM-elements scrolling into and out of view and fires a callback for them.</p>
+	<pre>
+	$(<em>'.first-element'</em>).scrollcallback(function(e, direction){
+		...
+	});</pre>
+	<pre>
+	$(<em>'.second-element'</em>).scrollcallback({
+		<b>inHandler:</b> function(e, direction){
+			...
+		},
+		<b>outHandler:</b> function(e, direction){
+			...
+		}
+	});</pre>
+	<pre>
+	$(<em>'.third-element'</em>).scrollcallback({
+		<b>inHandler:</b> function(e, direction){
+			...
+		},
+		<b>outHandler:</b> function(e, direction){
+			...
+		},
+		<b>context:</b> <em>'#context'</em>
+	});</pre>
+	<div class="first-element panel panel-primary" data-name="First element">
+		<div class="panel-heading">
+			<h3 class="panel-title">First element</h3>
+		</div>
+		<div class="panel-body"><p>Quisque non erat id metus tempor blandit. Nulla iaculis felis sed nisl venenatis, et molestie diam volutpat. Quisque consequat vestibulum turpis et accumsan. Maecenas sed volutpat lectus, a aliquet ex. Suspendisse potenti. Quisque at ex sit amet neque porta fringilla eu eu massa. Fusce lacus dui, pharetra quis tellus quis, condimentum luctus ante. Integer molestie purus at orci ultrices auctor. Maecenas posuere, libero ac laoreet facilisis, orci ipsum sagittis turpis, eu lacinia erat dolor vel velit. Curabitur tempus dui quis congue consequat. Donec fringilla, ante quis congue molestie, arcu nunc fermentum dui, sed condimentum nulla odio vitae metus. Duis blandit mollis aliquet. Sed est lacus, dapibus sit amet ligula vitae, egestas lobortis velit. Duis fringilla sapien risus. Vivamus cursus in enim sed varius.</p></div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<p>Vivamus a mollis quam. Vivamus sit amet velit non nulla maximus facilisis et in risus. Donec lobortis quam efficitur, varius ex vel, vehicula dui. Donec ut odio eleifend nunc hendrerit maximus. Proin accumsan purus in massa iaculis, sed ultrices ligula ultricies. Curabitur sodales justo suscipit tellus porta, sed ultricies ligula facilisis. Etiam eu augue non ligula vestibulum laoreet in ut justo. Phasellus lacus purus, aliquam eget maximus vel, accumsan a tortor. Fusce in accumsan nulla, sit amet suscipit purus. Etiam at tincidunt libero, eu dignissim odio. Nulla volutpat neque vitae tincidunt ultrices. Mauris justo lectus, tempus eu ex non, dictum maximus purus. Sed gravida sagittis risus, eget ultricies orci eleifend non. Donec feugiat nec nulla vel luctus.</p>
+			<p>Morbi quam nulla, tincidunt eget nibh vitae, suscipit varius ipsum. Cras quis eleifend justo. Suspendisse eget pulvinar justo, ut lobortis eros. Ut gravida vitae ligula non ullamcorper. Etiam eu blandit lacus. Fusce egestas sed turpis maximus volutpat. Etiam euismod eros malesuada condimentum condimentum. Sed dapibus, ligula id fermentum elementum, sapien nisl maximus nisl, in pulvinar magna nulla ultricies nunc.</p>
+			<p>Vestibulum vel arcu eleifend, faucibus felis a, rhoncus tellus. Aliquam erat volutpat. Sed mollis nec lectus at condimentum. Ut consectetur efficitur leo, in elementum turpis finibus non. Aliquam mi urna, semper nec lectus nec, pulvinar dapibus enim. Suspendisse gravida ipsum vel tortor suscipit, a iaculis lectus accumsan. Curabitur leo mi, dapibus sed aliquam vitae, consequat at diam. Nunc sit amet rutrum lectus, at mattis nulla. Pellentesque in urna ullamcorper, scelerisque risus non, aliquet odio. Curabitur convallis aliquet leo in finibus. Integer faucibus, lacus a fermentum gravida, enim dolor sodales tellus, ut venenatis nisl velit vel quam. Aenean interdum sapien ut eros varius, ut ultricies justo vehicula. Donec ornare finibus lorem quis dignissim.</p>
+			<ol>
+				<li><p>Nam tristique mauris odio, nec maximus nulla congue in. Vivamus ornare bibendum lacus et convallis. Donec consectetur porta eleifend. Maecenas sed mauris metus. Nam quis vehicula dolor. Proin non tempor purus. Nunc venenatis posuere lectus, sit amet facilisis libero porttitor in. Donec ut elit lacinia, pretium nisi imperdiet, tincidunt elit. Cras a dolor in dolor vulputate ultricies. Duis at eros non quam fermentum pellentesque. Aliquam lectus felis, suscipit nec sem non, convallis interdum turpis. Nam ultrices egestas erat in imperdiet. In hac habitasse platea dictumst. Vestibulum vel aliquet velit. Pellentesque maximus libero nec risus dignissim, at pellentesque ipsum malesuada. Aliquam quis euismod massa.</p></li>
+				<li>
+					<div class="second-element panel panel-success" data-name="Second element">
+						<div class="panel-heading">
+							<h3 class="panel-title">Second element</h3>
+						</div>
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in lectus ut nisi pulvinar molestie at ac lorem. Integer ac arcu vel erat varius congue ut in massa. Morbi vitae sem quis turpis bibendum commodo. Nullam fermentum dolor risus. Integer luctus tempus pellentesque. Curabitur pretium ipsum nibh. Etiam non leo malesuada, suscipit diam vel, varius diam. Quisque nec nunc blandit, elementum odio vitae, vestibulum tortor. Morbi ac lobortis nunc. Ut nec ligula erat. Praesent quis elit ut est tincidunt lacinia quis nec odio. Ut risus nunc, blandit vitae ultricies ut, maximus sit amet odio. Quisque volutpat leo nulla, nec tempus diam ultrices ac. Ut vitae felis viverra, tincidunt eros eu, commodo erat. Sed blandit eu turpis a molestie. Sed augue justo, sagittis vitae porta eu, molestie eget magna.</div>
+					</div>
+				</li>
+				<li><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in lectus ut nisi pulvinar molestie at ac lorem. Integer ac arcu vel erat varius congue ut in massa. Morbi vitae sem quis turpis bibendum commodo. Nullam fermentum dolor risus. Integer luctus tempus pellentesque. Curabitur pretium ipsum nibh. Etiam non leo malesuada, suscipit diam vel, varius diam. Quisque nec nunc blandit, elementum odio vitae, vestibulum tortor. Morbi ac lobortis nunc. Ut nec ligula erat. Praesent quis elit ut est tincidunt lacinia quis nec odio. Ut risus nunc, blandit vitae ultricies ut, maximus sit amet odio. Quisque volutpat leo nulla, nec tempus diam ultrices ac. Ut vitae felis viverra, tincidunt eros eu, commodo erat. Sed blandit eu turpis a molestie. Sed augue justo, sagittis vitae porta eu, molestie eget magna.</p></li>
+			</ol>
+			<p>Quisque non erat id metus tempor blandit. Nulla iaculis felis sed nisl venenatis, et molestie diam volutpat. Quisque consequat vestibulum turpis et accumsan. Maecenas sed volutpat lectus, a aliquet ex. Suspendisse potenti. Quisque at ex sit amet neque porta fringilla eu eu massa. Fusce lacus dui, pharetra quis tellus quis, condimentum luctus ante. Integer molestie purus at orci ultrices auctor. Maecenas posuere, libero ac laoreet facilisis, orci ipsum sagittis turpis, eu lacinia erat dolor vel velit. Curabitur tempus dui quis congue consequat. Donec fringilla, ante quis congue molestie, arcu nunc fermentum dui, sed condimentum nulla odio vitae metus. Duis blandit mollis aliquet. Sed est lacus, dapibus sit amet ligula vitae, egestas lobortis velit. Duis fringilla sapien risus. Vivamus cursus in enim sed varius.</p>
+			<p>Vestibulum vel arcu eleifend, faucibus felis a, rhoncus tellus. Aliquam erat volutpat. Sed mollis nec lectus at condimentum. Ut consectetur efficitur leo, in elementum turpis finibus non. Aliquam mi urna, semper nec lectus nec, pulvinar dapibus enim. Suspendisse gravida ipsum vel tortor suscipit, a iaculis lectus accumsan. Curabitur leo mi, dapibus sed aliquam vitae, consequat at diam. Nunc sit amet rutrum lectus, at mattis nulla. Pellentesque in urna ullamcorper, scelerisque risus non, aliquet odio. Curabitur convallis aliquet leo in finibus. Integer faucibus, lacus a fermentum gravida, enim dolor sodales tellus, ut venenatis nisl velit vel quam. Aenean interdum sapien ut eros varius, ut ultricies justo vehicula. Donec ornare finibus lorem quis dignissim.</p>
+			<p>Morbi quam nulla, tincidunt eget nibh vitae, suscipit varius ipsum. Cras quis eleifend justo. Suspendisse eget pulvinar justo, ut lobortis eros. Ut gravida vitae ligula non ullamcorper. Etiam eu blandit lacus. Fusce egestas sed turpis maximus volutpat. Etiam euismod eros malesuada condimentum condimentum. Sed dapibus, ligula id fermentum elementum, sapien nisl maximus nisl, in pulvinar magna nulla ultricies nunc.</p>
+		</div>
+	</div>
+	<div id="context" style="position:relative; height:200px;width:600px;margin:20px auto; overflow:auto; border:1px solid #999; background:#eee; padding: 10px;">
+		<p>Scroll me! There is Third Element.</p>
+		<p>Quisque non erat id metus tempor blandit. Nulla iaculis felis sed nisl venenatis, et molestie diam volutpat. Quisque consequat vestibulum turpis et accumsan. Maecenas sed volutpat lectus, a aliquet ex. Suspendisse potenti. Quisque at ex sit amet neque porta fringilla eu eu massa. Fusce lacus dui, pharetra quis tellus quis, condimentum luctus ante. Integer molestie purus at orci ultrices auctor. Maecenas posuere, libero ac laoreet facilisis, orci ipsum sagittis turpis, eu lacinia erat dolor vel velit. Curabitur tempus dui quis congue consequat. Donec fringilla, ante quis congue molestie, arcu nunc fermentum dui, sed condimentum nulla odio vitae metus. Duis blandit mollis aliquet. Sed est lacus, dapibus sit amet ligula vitae, egestas lobortis velit. Duis fringilla sapien risus. Vivamus cursus in enim sed varius.</p>
+		<div class="third-element panel panel-warning" data-name="Third element">
+			<div class="panel-heading">
+				<h3 class="panel-title">Third element</h3>
+			</div>
+			<div class="panel-body">Quisque non erat id metus tempor blandit. Nulla iaculis felis sed nisl venenatis, et molestie diam volutpat. Quisque consequat vestibulum turpis et accumsan. Maecenas sed volutpat lectus, a aliquet ex. Suspendisse potenti. Quisque at ex sit amet neque porta fringilla eu eu massa. Fusce lacus dui, pharetra quis tellus quis, condimentum luctus ante. Integer molestie purus at orci ultrices auctor. Maecenas posuere, libero ac laoreet facilisis, orci ipsum sagittis turpis, eu lacinia erat dolor vel velit. Curabitur tempus dui quis congue consequat. Donec fringilla, ante quis congue molestie, arcu nunc fermentum dui, sed condimentum nulla odio vitae metus. Duis blandit mollis aliquet. Sed est lacus, dapibus sit amet ligula vitae, egestas lobortis velit. Duis fringilla sapien risus. Vivamus cursus in enim sed varius.</div>
+		</div>
+	</div>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in lectus ut nisi pulvinar molestie at ac lorem. Integer ac arcu vel erat varius congue ut in massa. Morbi vitae sem quis turpis bibendum commodo. Nullam fermentum dolor risus. Integer luctus tempus pellentesque. Curabitur pretium ipsum nibh. Etiam non leo malesuada, suscipit diam vel, varius diam. Quisque nec nunc blandit, elementum odio vitae, vestibulum tortor. Morbi ac lobortis nunc. Ut nec ligula erat. Praesent quis elit ut est tincidunt lacinia quis nec odio. Ut risus nunc, blandit vitae ultricies ut, maximus sit amet odio. Quisque volutpat leo nulla, nec tempus diam ultrices ac. Ut vitae felis viverra, tincidunt eros eu, commodo erat. Sed blandit eu turpis a molestie. Sed augue justo, sagittis vitae porta eu, molestie eget magna.</p>
+</div>
+</body>
+</html>
