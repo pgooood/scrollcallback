@@ -1,3 +1,9 @@
+/**
+ * ScrollCallback
+ * Copyright (c) 2015 Pavel Khoroshkov. Licensed under the [MIT license](https://github.com/pgooood/scrollcallback/blob/master/LICENSE).
+ * @author Pavel Khoroshkov aka pgood
+ * @link https://github.com/pgooood/scrollcallback
+ */
 (function($){
 	
 	$.fn.scrollcallback = function(v){
