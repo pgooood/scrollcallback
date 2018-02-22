@@ -1,7 +1,7 @@
 # scrollcallback
 ScrollCallback is easy way to watch specific DOM-elements scrolling into and out of view and fires a callback for them.
 
-[Demo page](http://pgood.ru/userfiles/file/scrollcallback/demo/)
+[Demo page](http://pgood.space/userfiles/file/scrollcallback/demo/)
 
 ```js
 $('.first-element').scrollcallback(function(e, direction){
